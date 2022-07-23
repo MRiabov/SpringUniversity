@@ -50,20 +50,20 @@ Author URL: http://w3layouts.com
                             <div class="row">
                                 <div class="col-sm-6">
                                     <input type="text" name="name" id="name" placeholder="Your Name"
-                                        class="contactInquiry-input" />
+                                        class="contactInquiry-input" required="true"/>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" name="mobileNum" id="mobileNum" placeholder="Your Mobile Number"
+                                    <input type="number" name="mobileNum" id="mobileNum" placeholder="Your Mobile Number"
                                         class="contactInquiry-input" />
                                 </div>
                             </div>
-                            <input type="text" name="email" id="email" placeholder="Your Email"
+                            <input type="email" name="email" id="email" placeholder="Your Email" required="true"
                                 class="contactInquiry-input" />
-                            <input type="text" name="subject" id="subject" placeholder="Subject"
+                            <input type="text" name="subject" id="subject" placeholder="Subject" required="true"
                                 class="contactInquiry-input" />
                         </div>
                         <div class="form-input">
-                            <textarea name="message" id="message" placeholder="Type your message here"></textarea>
+                            <textarea name="message" id="message" placeholder="Type your message here" required="true"></textarea>
                         </div>
                         <div class="text-start">
                             <button class="btn btn-style btn-style-3">Send Message</button>
