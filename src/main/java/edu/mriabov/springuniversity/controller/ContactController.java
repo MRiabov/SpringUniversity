@@ -2,20 +2,20 @@ package edu.mriabov.springuniversity.controller;
 
 import edu.mriabov.springuniversity.model.ContactInquiry;
 import edu.mriabov.springuniversity.service.ContactInquiryService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 
+@Slf4j
 @Controller
 public class ContactController {
-
-    private static final Logger log = LoggerFactory.getLogger(ContactController.class);
 
     ContactInquiryService contactInquiryService;
 
@@ -26,13 +26,18 @@ public class ContactController {
 
     @RequestMapping(value = {"/contact"})
     public String displayContactPage(Model model) {
+        model.addAttribute("contact",new ContactInquiry());
         return "contact.html";
     }
 
     @PostMapping(value = "/saveMsg")
-    public ModelAndView saveMessage(ContactInquiry contactInquiry){
+    public String saveMessage(@Valid @ModelAttribute("contact") ContactInquiry contactInquiry, Errors errors){
+        if (errors.hasErrors()) {
+            log.error("Error due to + " + errors);
+            return "contact.html";
+        }
         contactInquiryService.saveMessageDetails(contactInquiry);
-        return new ModelAndView("redirect:/contact");
+        return "redirect:/contact";
     }
 
 
