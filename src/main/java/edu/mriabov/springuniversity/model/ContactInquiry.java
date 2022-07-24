@@ -1,15 +1,13 @@
 package edu.mriabov.springuniversity.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@Getter
-@NoArgsConstructor
+@Data
 public class ContactInquiry {
 
     @NotBlank(message = "Name should not be blank.")
