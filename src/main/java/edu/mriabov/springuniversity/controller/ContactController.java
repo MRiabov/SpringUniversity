@@ -31,12 +31,12 @@ public class ContactController {
     }
 
     @PostMapping(value = "/saveMsg")
-    public String saveMessage(@Valid @ModelAttribute("contact") ContactInquiry contactInquiry, Errors errors){
+    public String saveMessage(@Valid @ModelAttribute("contact") ContactInquiry contact, Errors errors){
         if (errors.hasErrors()) {
             log.error("Error due to + " + errors);
             return "contact.html";
         }
-        contactInquiryService.saveMessageDetails(contactInquiry);
+        contactInquiryService.saveMessageDetails(contact);
         return "redirect:/contact";
     }
 

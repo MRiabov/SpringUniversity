@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContactInquiryService {
 
-    public boolean saveMessageDetails(ContactInquiry contactInquiry){
+    public boolean saveMessageDetails(ContactInquiry contact){
         boolean isSaved=true;
         //todo save info into the DB
-        log.info(contactInquiry.toString());
+        log.info(contact.toString());
         return isSaved;
     }
 }
