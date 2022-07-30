@@ -18,7 +18,7 @@ public class ContactRepository {
 
     public int saveContactInquiry(ContactInquiry contact){
         String sql="INSERT INTO CONTACT_MSG (NAME,MOBILE_NUM,EMAIL,SUBJECT,MESSAGE,STATUS," +
-                "CREATED_AT,CREATED_BY) VALUES (?,?,?,?,?,?)";
+                "CREATED_AT,CREATED_BY) VALUES (?,?,?,?,?,?,?,?)";
         return jdbcTemplate.update(sql,contact.getName(),contact.getNumber(), contact.getEmail(),
                 contact.getSubject(),contact.getMessage(),contact.getStatus(),contact.getCreatedAt(),
                 contact.getCreatedBy());
