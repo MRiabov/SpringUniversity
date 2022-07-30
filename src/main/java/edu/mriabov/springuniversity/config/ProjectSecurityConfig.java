@@ -12,25 +12,27 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-            http.csrf().ignoringAntMatchers("/saveMsg").and()
+        http.csrf().ignoringAntMatchers("/saveMsg", "/h2-console/**").and()
                 .authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
-                .mvcMatchers("/home","/holidays/**","/contact",
-                        "/saveMsg","/courses","/about","/login").permitAll()
+                .mvcMatchers("/home", "/holidays/**", "/contact",
+                        "/saveMsg", "/courses", "/about", "/login").permitAll()
                 .and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
                 .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
+                .and().authorizeRequests().antMatchers("/h2-console/**").permitAll()
                 .and().httpBasic();
 
+        http.headers().frameOptions().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-            .withUser("user").password("12345").roles("USER")
-            .and()
-            .withUser("admin").password("54321").roles("USER", "ADMIN")
-            .and().passwordEncoder(NoOpPasswordEncoder.getInstance());
+                .withUser("user").password("12345").roles("USER")
+                .and()
+                .withUser("admin").password("54321").roles("USER", "ADMIN")
+                .and().passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
 }
