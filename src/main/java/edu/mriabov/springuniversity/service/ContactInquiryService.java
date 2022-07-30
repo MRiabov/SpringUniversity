@@ -1,5 +1,6 @@
 package edu.mriabov.springuniversity.service;
 
+import edu.mriabov.springuniversity.constants.ContactInquiryConstants;
 import edu.mriabov.springuniversity.model.ContactInquiry;
 import edu.mriabov.springuniversity.repository.ContactRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,8 @@ public class ContactInquiryService {
 
     public boolean saveMessageDetails(ContactInquiry contact){
         boolean isSaved=false;
-        contact.setOpen(false);
-        contact.setCreatedBy("Anonymous");
+        contact.setStatus(ContactInquiryConstants.OPEN);
+        contact.setCreatedBy(ContactInquiryConstants.ANONYMOUS);
         contact.setCreatedAt(LocalDateTime.now());
         int result=contactRepository.saveContactInquiry(contact);
         if (result>0) isSaved=true;
