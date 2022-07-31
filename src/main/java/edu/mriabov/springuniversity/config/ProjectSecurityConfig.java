@@ -15,6 +15,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/saveMsg", "/h2-console/**").and()
                 .authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
+                .mvcMatchers("/displayMessages").hasRole("ADMIN")
                 .mvcMatchers("/home", "/holidays/**", "/contact",
                         "/saveMsg", "/courses", "/about", "/login").permitAll()
                 .and().formLogin().loginPage("/login")

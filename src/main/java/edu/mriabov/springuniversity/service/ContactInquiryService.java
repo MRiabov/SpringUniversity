@@ -25,5 +25,8 @@ public class ContactInquiryService {
         if (result>0) isSaved=true;
         return isSaved;
     }
-    public List<ContactInquiry>
+
+    public List<ContactInquiry> findMsgsWithOpenStatus(){
+        return contactRepository.findMsgsWithStatus(ContactInquiryConstants.OPEN);
+    }
 }

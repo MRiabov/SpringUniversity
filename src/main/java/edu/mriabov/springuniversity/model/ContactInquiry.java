@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 @Data
 public class ContactInquiry extends BaseEntity{
 
+    private int contactID;
+
     @NotBlank(message = "Name should not be blank.")
     @Size(min=3, message = "Name should be at least 3 letters long.")
     private String name;
