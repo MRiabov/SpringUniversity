@@ -5,13 +5,16 @@ import edu.mriabov.springuniversity.service.ContactInquiryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -24,7 +27,7 @@ public class ContactController {
         this.contactInquiryService = contactInquiryService;
     }
 
-    @RequestMapping(value = {"/contact"})
+    @RequestMapping(value ="/contact")
     public String displayContactPage(Model model) {
         model.addAttribute("contact",new ContactInquiry());
         return "contact.html";
@@ -40,6 +43,12 @@ public class ContactController {
         return "redirect:/contact";
     }
 
+    @RequestMapping(value="/displayMessages")
+    public String displayMessages(Model model){
+        List<ContactInquiry> Inquiries=contactInquiryService.findMsgsWithOpenStatus();
+        ModelAndView modelAndView = new ModelAndView("messages.html");
+        modelAndView.addObject("contactMsgs",Inquiries);
+    }
 
 
 
