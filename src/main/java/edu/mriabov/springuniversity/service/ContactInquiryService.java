@@ -29,4 +29,11 @@ public class ContactInquiryService {
     public List<ContactInquiry> findMsgsWithOpenStatus(){
         return contactRepository.findMsgsWithStatus(ContactInquiryConstants.OPEN);
     }
+
+    public boolean updateMsgStatus(int contactID, String updatedBy) {
+        boolean isUpdated=false;
+        int result = contactRepository.updateMsgStatus(contactID,ContactInquiryConstants.CLOSED,updatedBy);
+        if (result>0) isUpdated=true;
+        return isUpdated;
+    }
 }

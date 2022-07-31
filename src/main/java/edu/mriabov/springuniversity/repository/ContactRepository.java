@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -34,5 +36,15 @@ public class ContactRepository {
                 new ContactRowMapper());
 
 
+    }
+
+    public int updateMsgStatus(int contactID, String status, String updatedBy) {
+        String sql="UPDATE CONTACT_MSG SET STATUS = ?, UPDATED_AT = ? WHERE CONTACT_ID = ?";
+        return jdbcTemplate.update(sql, ps -> {
+            ps.setString(1,status);
+            ps.setString(2,updatedBy);
+            ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setInt(4,contactID);
+        });
     }
 }
