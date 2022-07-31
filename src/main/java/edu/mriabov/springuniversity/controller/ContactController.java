@@ -4,13 +4,14 @@ import edu.mriabov.springuniversity.model.ContactInquiry;
 import edu.mriabov.springuniversity.service.ContactInquiryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -44,13 +45,17 @@ public class ContactController {
     }
 
     @RequestMapping(value="/displayMessages")
-    public String displayMessages(Model model){
+    public ModelAndView displayMessages(Model model){
         List<ContactInquiry> Inquiries=contactInquiryService.findMsgsWithOpenStatus();
         ModelAndView modelAndView = new ModelAndView("messages.html");
         modelAndView.addObject("contactMsgs",Inquiries);
+        return modelAndView;
     }
-
-
+    @RequestMapping(value="/closeMsg")
+    public String closeMessage(@RequestParam int id, Authentication authentication){
+        contactInquiryService.updateMsgStatus(id,authentication.getName());
+        return "redirect:/displayMessages";
+    }
 
 
 }
