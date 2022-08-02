@@ -1,7 +1,7 @@
 package edu.mriabov.springuniversity.service;
 
 import edu.mriabov.springuniversity.constants.ContactInquiryConstants;
-import edu.mriabov.springuniversity.model.ContactInquiry;
+import edu.mriabov.springuniversity.model.Contact;
 import edu.mriabov.springuniversity.repository.ContactRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class ContactInquiryService {
     @Autowired
     private ContactRepository contactRepository;
 
-    public boolean saveMessageDetails(ContactInquiry contact){
+    public boolean saveMessageDetails(Contact contact){
         boolean isSaved=false;
         contact.setStatus(ContactInquiryConstants.OPEN);
         contact.setCreatedBy(ContactInquiryConstants.ANONYMOUS);
@@ -26,7 +26,7 @@ public class ContactInquiryService {
         return isSaved;
     }
 
-    public List<ContactInquiry> findMsgsWithOpenStatus(){
+    public List<Contact> findMsgsWithOpenStatus(){
         return contactRepository.findMsgsWithStatus(ContactInquiryConstants.OPEN);
     }
 

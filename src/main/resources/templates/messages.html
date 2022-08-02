@@ -57,9 +57,9 @@ Author URL: http://w3layouts.com
             </tr>
             </thead>
             <tbody>
-            <tr th:each="msg: ${inquiries}">
+            <tr th:each="msg: ${contactMsgs}">
                 <td th:text="${msg.name}"></td>
-                <td th:text="${msg.number}"></td>
+                <td th:text="${msg.mobileNum}"></td>
                 <td th:text="${msg.email}"></td>
                 <td th:text="${msg.subject}"></td>
                 <td th:text="${msg.message}"></td>

@@ -1,6 +1,6 @@
 package edu.mriabov.springuniversity.controller;
 
-import edu.mriabov.springuniversity.model.ContactInquiry;
+import edu.mriabov.springuniversity.model.Contact;
 import edu.mriabov.springuniversity.service.ContactInquiryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +27,12 @@ public class ContactController {
 
     @RequestMapping(value ="/contact")
     public String displayContactPage(Model model) {
-        model.addAttribute("contact",new ContactInquiry());
+        model.addAttribute("contact",new Contact());
         return "contact.html";
     }
 
     @PostMapping(value = "/saveMsg")
-    public String saveMessage(@Valid @ModelAttribute("contact") ContactInquiry contact, Errors errors){
+    public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors){
         if (errors.hasErrors()) {
             log.error("Error due to + " + errors);
             return "contact.html";
@@ -43,9 +43,9 @@ public class ContactController {
 
     @RequestMapping(value="/displayMessages")
     public ModelAndView displayMessages(Model model){
-        List<ContactInquiry> inquiries =contactInquiryService.findMsgsWithOpenStatus();
+        List<Contact> contactMsgs =contactInquiryService.findMsgsWithOpenStatus();
         ModelAndView modelAndView = new ModelAndView("messages.html");
-        modelAndView.addObject("contactMsgs", inquiries);
+        modelAndView.addObject("contactMsgs", contactMsgs);
         return modelAndView;
     }
     @RequestMapping(value="/closeMsg",method = RequestMethod.GET)

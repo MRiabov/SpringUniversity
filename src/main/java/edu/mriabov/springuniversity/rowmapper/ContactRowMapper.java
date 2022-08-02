@@ -1,19 +1,19 @@
 package edu.mriabov.springuniversity.rowmapper;
 
-import edu.mriabov.springuniversity.model.ContactInquiry;
+import edu.mriabov.springuniversity.model.Contact;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ContactRowMapper implements RowMapper<ContactInquiry> {
+public class ContactRowMapper implements RowMapper<Contact> {
 
     @Override
-    public ContactInquiry mapRow(ResultSet rs, int rowNum) throws SQLException {
-        ContactInquiry contact = new ContactInquiry();
-        contact.setContactID(rs.getInt("CONTACT_ID"));
+    public Contact mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Contact contact = new Contact();
+        contact.setContactId(rs.getInt("CONTACT_ID"));
         contact.setName(rs.getString("NAME"));
-        contact.setNumber(rs.getString("MOBILE_NUM"));
+        contact.setMobileNum(rs.getString("MOBILE_NUM"));
         contact.setEmail(rs.getString("EMAIL"));
         contact.setSubject(rs.getString("SUBJECT"));
         contact.setMessage(rs.getString("MESSAGE"));
