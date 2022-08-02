@@ -1,15 +1,13 @@
 package edu.mriabov.springuniversity.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
-@AllArgsConstructor
+@Data
+public class Holiday extends BaseEntity {
 
-public class Holiday {
-    private final String day;
-    private final String reason;
-    private final Type type;
+    private String day;
+    private String reason;
+    private Type type;
 
     public enum Type{
         FEDERAL,
