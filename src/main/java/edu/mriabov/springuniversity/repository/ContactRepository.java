@@ -30,7 +30,7 @@ public class ContactRepository {
     }
 
     public List<ContactInquiry> findMsgsWithStatus(String status) {
-        String sql="SELECT * WHERE CONTACT_MSG WHERE STATUS = ?";
+        String sql="SELECT * FROM CONTACT_MSG WHERE STATUS = ?";
         return jdbcTemplate.query(sql,
                 ps -> ps.setString(1, status),
                 new ContactRowMapper());
@@ -39,8 +39,9 @@ public class ContactRepository {
     }
 
     public int updateMsgStatus(int contactID, String status, String updatedBy) {
-        String sql="UPDATE CONTACT_MSG SET STATUS = ?, UPDATED_AT = ? WHERE CONTACT_ID = ?";
+        String sql="UPDATE CONTACT_MSG SET STATUS = ?, UPDATED_BY = ?, UPDATED_AT = ? WHERE CONTACT_ID = ?";
         return jdbcTemplate.update(sql, ps -> {
+            ps.setString(1,status);
             ps.setString(1,status);
             ps.setString(2,updatedBy);
             ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));

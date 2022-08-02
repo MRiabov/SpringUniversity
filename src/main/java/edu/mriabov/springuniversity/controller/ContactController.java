@@ -8,10 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -21,7 +18,7 @@ import java.util.List;
 @Controller
 public class ContactController {
 
-    ContactInquiryService contactInquiryService;
+    private final ContactInquiryService contactInquiryService;
 
     @Autowired
     public ContactController(ContactInquiryService contactInquiryService) {
@@ -46,13 +43,13 @@ public class ContactController {
 
     @RequestMapping(value="/displayMessages")
     public ModelAndView displayMessages(Model model){
-        List<ContactInquiry> Inquiries=contactInquiryService.findMsgsWithOpenStatus();
+        List<ContactInquiry> inquiries =contactInquiryService.findMsgsWithOpenStatus();
         ModelAndView modelAndView = new ModelAndView("messages.html");
-        modelAndView.addObject("contactMsgs",Inquiries);
+        modelAndView.addObject("contactMsgs", inquiries);
         return modelAndView;
     }
-    @RequestMapping(value="/closeMsg")
-    public String closeMessage(@RequestParam int id, Authentication authentication){
+    @RequestMapping(value="/closeMsg",method = RequestMethod.GET)
+    public String closeMsg(@RequestParam int id, Authentication authentication){
         contactInquiryService.updateMsgStatus(id,authentication.getName());
         return "redirect:/displayMessages";
     }
