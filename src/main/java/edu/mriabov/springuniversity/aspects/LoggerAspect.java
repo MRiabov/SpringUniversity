@@ -25,7 +25,7 @@ public class LoggerAspect {
         return result;
     }
 
-    @AfterThrowing(value = "execution(* edu.mriabov.springuniversity.*.*(..))", throwing = "ex")
+    @AfterThrowing(value = "execution(* edu.mriabov.springuniversity..*.*(..))", throwing = "ex")
     public void logError(JoinPoint joinPoint, Exception ex){
         log.error(joinPoint.getSignature()+ " threw "+ex.getMessage());
     }
