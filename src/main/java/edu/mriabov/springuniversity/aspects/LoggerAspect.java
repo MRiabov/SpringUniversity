@@ -20,7 +20,7 @@ public class LoggerAspect {
         log.info(joinPoint.getSignature().toString() + " method execution start");
         Instant start = Instant.now();
         Object result = joinPoint.proceed();
-        log.info("Time to execute "+ joinPoint.getSignature().toString() + ": " + Duration.between(Instant.now(), start));
+        log.info("Time to execute "+ joinPoint.getSignature().toString() + ": " + Duration.between(start, Instant.now()));
         log.info(joinPoint.getSignature().toString()+" method executed");
         return result;
     }
