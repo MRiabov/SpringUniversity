@@ -23,7 +23,7 @@ public class ContactInquiryService {
         contact.setCreatedBy(ContactInquiryConstants.ANONYMOUS);
         contact.setCreatedAt(LocalDateTime.now());
         Contact savedContact=contactRepository.save(contact);
-        if (null!= savedContact&&savedContact.contactId>0) isSaved=true;
+        if (null!= savedContact&&savedContact.getContactId()>0) isSaved=true;
         return isSaved;
     }
 
