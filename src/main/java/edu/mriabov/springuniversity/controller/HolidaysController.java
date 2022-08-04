@@ -28,7 +28,9 @@ public class HolidaysController {
                 model.addAttribute("festival",true);
             }
         }//todo is this ok?
-        List<Holiday> holidays = (List<Holiday>) holidaysRepository.findAll();
+        Iterable<Holiday> holidaysIterable = holidaysRepository.findAll();
+        List<Holiday> holidays=java.util.stream.StreamSupport.stream(holidaysIterable.spliterator(),false)
+                .toList();
         Holiday.Type[] types = Holiday.Type.values();
         for (Holiday.Type type : types) {
             model.addAttribute(type.toString(),
