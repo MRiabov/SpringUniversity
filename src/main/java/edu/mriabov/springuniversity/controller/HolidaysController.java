@@ -27,8 +27,8 @@ public class HolidaysController {
                 model.addAttribute("federal",true);
                 model.addAttribute("festival",true);
             }
-        }
-        List<Holiday> holidays = holidaysRepository.findAllHolidays();
+        }//todo is this ok?
+        List<Holiday> holidays = (List<Holiday>) holidaysRepository.findAll();
         Holiday.Type[] types = Holiday.Type.values();
         for (Holiday.Type type : types) {
             model.addAttribute(type.toString(),
