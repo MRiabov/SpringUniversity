@@ -6,8 +6,7 @@ import edu.mriabov.springuniversity.annotation.PasswordValidator;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -52,4 +51,12 @@ public class Person {
     @NotNull(message = "Please confirm your password.")
     @Transient
     private String confirmPwd;
+
+    @OneToOne(fetch = FetchType.EAGER,cascade= CascadeType.PERSIST, targetEntity = Roles.class)
+    @JoinColumn(name = "role_id",referencedColumnName = "role_id", nullable = false)
+    private Roles roles;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Address.class)
+    @JoinColumn(name = "addressId", referencedColumnName = "address_id")
+    private Address address;
 }

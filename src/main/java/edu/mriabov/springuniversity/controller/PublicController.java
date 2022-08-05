@@ -1,7 +1,9 @@
 package edu.mriabov.springuniversity.controller;
 
 import edu.mriabov.springuniversity.model.Person;
+import edu.mriabov.springuniversity.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,8 +17,8 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("public")
 public class PublicController {
-//    @Autowired
-//    PersonService personService;
+    @Autowired
+    PersonService personService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String displayRegister(Model model){
@@ -28,7 +30,10 @@ public class PublicController {
         if (errors.hasErrors()){
             return "register.html";
         }
-        return "redirect:/login?register=true";
+        boolean isSaved = personService.createNewPerson();
+        if (isSaved) return "redirect:/login?register=true";
+        else return "register.html";
+
     }
 
 }

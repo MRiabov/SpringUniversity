@@ -1,12 +1,10 @@
 package edu.mriabov.springuniversity.repository;
 
-import edu.mriabov.springuniversity.model.Roles;
+import edu.mriabov.springuniversity.model.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RolesRepository extends JpaRepository<Roles, Integer> {
-
-    Roles getByRoleName(String roleName);
+public interface AddressRepository extends JpaRepository<Address,Integer> {
 
 }
