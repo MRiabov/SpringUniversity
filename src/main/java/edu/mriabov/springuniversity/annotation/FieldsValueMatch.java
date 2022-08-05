@@ -1,5 +1,7 @@
 package edu.mriabov.springuniversity.annotation;
 
+import edu.mriabov.springuniversity.validator.FieldsValueMatchValidator;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
