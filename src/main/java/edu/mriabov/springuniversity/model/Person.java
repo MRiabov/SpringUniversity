@@ -51,5 +51,5 @@ public class Person {
 
     @NotNull(message = "Please confirm your password.")
     @Transient
-    private String confirmPassword;
+    private String confirmPwd;
 }

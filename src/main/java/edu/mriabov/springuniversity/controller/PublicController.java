@@ -23,7 +23,7 @@ public class PublicController {
         model.addAttribute("person", new Person());
         return "register.html";
     }
-    @RequestMapping(value="/createUser",method = RequestMethod.GET)
+    @RequestMapping(value="/createUser",method = RequestMethod.POST)
     public String createUser(@Valid @ModelAttribute("person") Person person, Errors errors){
         if (errors.hasErrors()){
             return "register.html";
