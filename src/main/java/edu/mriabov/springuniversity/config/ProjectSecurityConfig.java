@@ -12,12 +12,12 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().ignoringAntMatchers("/saveMsg").and()
+        http.csrf().ignoringAntMatchers("/saveMsg","/public/**").and()
                 .authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
                 .mvcMatchers("/displayMessages").hasRole("ADMIN")
                 .mvcMatchers("/home", "/holidays/**", "/contact",
-                        "/saveMsg", "/courses", "/about", "/login").permitAll()
+                        "/saveMsg", "/courses", "/about", "/login","/public/**").permitAll()
                  .and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
                 .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
