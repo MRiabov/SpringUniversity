@@ -1,6 +1,6 @@
-# SpringUniversity
-A production-ready Spring web application. I used Spring core, Security, Boot, REST, Lombok, Thymeleaf, JPA and other cool stuff
-This project is a guided, and used for studying.
+# Spring University
+A production-ready Spring web application. I used Spring core, Security, Boot, REST, Lombok, Thymeleaf, JPA and other cool stuff.
+This project is guided, and used for studying purposes only.
 ## Description 
 This project a fully operational school website.  It relies on Spring Framework to a great extend, since it was used to study the framework itself. 
 ### What was used:
@@ -34,4 +34,4 @@ Operate just how you would a normal website. However, as you probably are an HR 
 - When you register, and login, you can view the Dashboard. If you've logged as a teacher, you will see Messages tab. Once clicked, it redirects you to the message tab, where you will see your message. You can set the status of the message to "closed", and it will no longer appear.
 - You can logout and see the message "You have been successfully logged out!" on the Login page.
 - If you scroll down(or just ctrl+f) Holidays, you will find a Holidays tab in the footer. Click on it to see the Holidays fetched from the database. Holidays have 2 statuses, one being Federal, and one being Festival. you can change the link to /holidays/festival, or /federal, to view only one type of holidays.
-###### if you see this, i haven't finished the project yet, sorry. I have to add login, but it wasn't done yet...
+###### if you see this, i haven't finished the project yet, sorry. I have to add login credentials, but it wasn't done yet... W
