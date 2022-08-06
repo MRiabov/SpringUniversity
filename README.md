@@ -1,4 +1,4 @@
-v# SpringUniversity
+# SpringUniversity
 A production-ready Spring web application. I used Spring core, Security, Boot, REST, Lombok, Thymeleaf, JPA and other cool stuff
 This project is a guided, and used for studying.
 ## Description 
