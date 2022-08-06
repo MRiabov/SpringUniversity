@@ -17,8 +17,12 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("public")
 public class PublicController {
-    @Autowired
     PersonService personService;
+
+    @Autowired
+    public PublicController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String displayRegister(Model model){
@@ -30,7 +34,7 @@ public class PublicController {
         if (errors.hasErrors()){
             return "register.html";
         }
-        boolean isSaved = personService.createNewPerson();
+        boolean isSaved = personService.createNewPerson(person);
         if (isSaved) return "redirect:/login?register=true";
         else return "register.html";
 

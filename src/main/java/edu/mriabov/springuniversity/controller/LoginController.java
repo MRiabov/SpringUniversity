@@ -25,7 +25,7 @@ public class LoginController {
         String errorMessage = null;
         if (error != null) errorMessage = "Username or password incorrect!";
         if (logout != null) errorMessage = "Logout Successful";
-        if (logout!=null) errorMessage = "Your registration is successful! Please login.";
+        if (register != null) errorMessage = "Your registration is successful! Please login.";
         model.addAttribute("errorMessage", errorMessage);
         return "login.html";
     }

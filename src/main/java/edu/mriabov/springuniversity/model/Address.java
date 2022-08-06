@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -17,12 +20,26 @@ public class Address extends BaseEntity{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO,generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    private int adressId;
+    private int addressId;
     
-    private String adress1;
-    private String adress2;
+
+    @Size(min = 5, message = "Your address is too short.")
+    @NotBlank(message="Address must not be blank!")
+    private String address1;
+
+    private String address2;
+
+    @NotBlank(message="City must not be blank")
+    @Size(min=5, message="City must be at least 5 characters long")
     private String city;
-    private int zipCode;
+
+    @NotBlank(message="State must not be blank")
+    @Size(min=5, message="State must be at least 5 characters long")
     private String state;
+
+    @NotBlank(message="Zip Code must not be blank")
+    @Pattern(regexp="(^$|[0-9]{5})",message = "Zip Code must be 5 digits")
+    private int zipCode;
+
 
 }
