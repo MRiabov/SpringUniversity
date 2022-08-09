@@ -15,31 +15,30 @@ import javax.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
-public class Address extends BaseEntity{
+public class Address extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO,generator = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private int addressId;
-    
 
     @Size(min = 5, message = "Your address is too short.")
-    @NotBlank(message="Address must not be blank!")
+    @NotBlank(message = "Address must not be blank!")
     private String address1;
 
     private String address2;
 
-    @NotBlank(message="City must not be blank")
-    @Size(min=5, message="City must be at least 5 characters long")
+    @NotBlank(message = "City must not be blank")
+    @Size(min = 5, message = "City must be at least 5 characters long")
     private String city;
 
-    @NotBlank(message="State must not be blank")
-    @Size(min=5, message="State must be at least 5 characters long")
+    @NotBlank(message = "State must not be blank")
+    @Size(min = 5, message = "State must be at least 5 characters long")
     private String state;
 
-    @NotBlank(message="Zip Code must not be blank")
-    @Pattern(regexp="(^$|[0-9]{5})",message = "Zip Code must be 5 digits")
-    private int zipCode;
+    @NotBlank(message = "Zip Code must not be blank")
+    @Pattern(regexp = "(^$|[0-9]{5})", message = "Zip Code must be 5 digits")
+    private String zipCode;
 
 
 }
