@@ -24,6 +24,7 @@ public class PersonService {
         Roles role = rolesRepository.getByRoleName(RolesConstants.STUDENT_ROLE);
         person.setRoles(role);
         person.setPwd(passwordEncoder.encode(person.getPwd()));
+        person = personRepository.save(person);
         if (person!=null && person.getPersonId()>0) isSaved = true;
         return isSaved;
     }
