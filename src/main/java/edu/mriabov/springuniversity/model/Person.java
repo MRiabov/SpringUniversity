@@ -27,6 +27,7 @@ import javax.validation.constraints.Size;
                 message = "Emails do not match!"
         )
 })
+@Entity
 public class Person extends BaseEntity{
 
     @Id
