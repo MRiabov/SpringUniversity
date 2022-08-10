@@ -16,7 +16,7 @@ This project a fully operational school website.  It relies on Spring Framework 
    - Repositories management (CRUD and others)
     - Hibernate stuff 
     - Derived Query Methods
-    - Relationships
+    - Relationships(1-1, 1-M, M-M)
 - **MySQL**
 - Databases are hosted on **AWS** as an RDS.
 - Thymeleaf
@@ -34,10 +34,10 @@ Operate just how you would a normal website. However, as you probably are an HR 
 ###### login credentials for user:  maksymriabov2004@gmail.com:1234567, for admin:  admin@gmail.com:admin123
   - Home: to the page you are currently on.
   - When you register, and login, you can view the Dashboard. 
--**Admin only**:
+- **Admin only**:
   - If you've logged as a teacher, you will see Messages tab. Once clicked, it redirects you to the message tab, where you will see messages from students. You can set the status of the message to "closed", and it will no longer appear.
   - If you click "Profile", it will redirect you to a place where you can alter your information, like your place of living. Once entered, this information will be loaded every time you use this page.
-  - In "Classes page, you can review all the classes in the school. Click "View" to get the information about students. You can add or remove students from the class. You can not break the system by entering invalid emails or IDs in link, - you will see the error above the field. If you refistered, try to insert your email!
+  - In "Classes" page, you can review all the classes in the school. Click "View" to get the information about students. You can add or remove students from the class. If you enter a wrong email, system recognises it and shows an error. If you registered before, try to insert your email!
   
 - You can logout and see the message "You have been successfully logged out!" on the Login page.
 
