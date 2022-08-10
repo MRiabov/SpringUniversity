@@ -20,7 +20,7 @@ public class EazyClass extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    private Long classId;
+    private int classId;
 
     @NotBlank(message = "Name of the class must not be blank.")
     @Size(min=2, message = "Size must not be less than 2.")
