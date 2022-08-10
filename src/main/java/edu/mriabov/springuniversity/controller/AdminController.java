@@ -1,7 +1,9 @@
 package edu.mriabov.springuniversity.controller;
 
+import edu.mriabov.springuniversity.model.Courses;
 import edu.mriabov.springuniversity.model.EazyClass;
 import edu.mriabov.springuniversity.model.Person;
+import edu.mriabov.springuniversity.repository.CoursesRepository;
 import edu.mriabov.springuniversity.repository.EazyClassRepository;
 import edu.mriabov.springuniversity.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class AdminController {
 
     final EazyClassRepository eazyClassRepository;
     final PersonRepository personRepository;
+    final CoursesRepository coursesRepository;
 
     @RequestMapping("/displayClasses")
     public ModelAndView displayClasses(Model model) {
@@ -96,5 +99,14 @@ public class AdminController {
                 + eazyClass.getClassId() + "&error=true");
         httpSession.setAttribute("eazyClass",eazyClass);
         return new ModelAndView("redirect:/admin/displayStudents?classId=" + eazyClass.getClassId());
+    }
+
+    @GetMapping("/displayCourses")
+    public ModelAndView displayCourses(Model model){
+        ModelAndView modelAndView = new ModelAndView("courses_secure.html");
+        List<Courses> courses = coursesRepository.findAll();
+        modelAndView.addObject("courses",courses);
+        modelAndView.addObject("course",new Courses());
+        return modelAndView;
     }
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class Course {
+public class Courses {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
