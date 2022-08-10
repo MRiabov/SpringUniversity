@@ -17,7 +17,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .mvcMatchers("/dashboard","/displayProfile","/updateProfile").authenticated()
                 .mvcMatchers("/displayMessages","/admin/**").hasRole("ADMIN")
-                .mvcMatchers("/home", "/holidays/**", "/contact",
+                .mvcMatchers("/home", "/holidays/**", "/contact", "/error",
                         "/saveMsg", "/courses", "/about", "/login", "/public/**").permitAll()
                 .and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()

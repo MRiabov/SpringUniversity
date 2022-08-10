@@ -36,8 +36,7 @@ public class AdminController {
     @PostMapping("/addNewClass")
     public ModelAndView addNewClass(Model model, @ModelAttribute("eazyClass") EazyClass eazyClass) {
         eazyClassRepository.save(eazyClass);
-        ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayClasses");
-        return modelAndView;
+        return new ModelAndView("redirect:/admin/displayClasses");
     }
 
     @RequestMapping("/deleteClass")
@@ -48,8 +47,7 @@ public class AdminController {
             personRepository.save(person);
         }
         eazyClassRepository.deleteById(id);
-        ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayClasses");
-        return modelAndView;
+        return new ModelAndView("redirect:/admin/displayClasses");
     }
 
     @GetMapping("/displayStudents")
@@ -61,7 +59,7 @@ public class AdminController {
         modelAndView.addObject("person", new Person());
         session.setAttribute("eazyClass", eazyClass.get());
         if (error != null) {
-            errorMessage="Invalid method entered!";
+            errorMessage="Invalid email entered!";
             modelAndView.addObject("errorMessage",errorMessage);
         }
         return modelAndView;
@@ -84,5 +82,19 @@ public class AdminController {
         return modelAndView;
     }
 
-    @PostMapping("delete")
+    @GetMapping("/deleteStudent")
+    public ModelAndView deleteStudent(Model model,@ModelAttribute("personId") int personId,HttpSession httpSession){
+        Optional<Person> person = personRepository.findById(personId);
+        EazyClass eazyClass = (EazyClass) httpSession.getAttribute("eazyClass");
+
+        if (person.isPresent()) {
+            person.get().setEazyClass(null);
+            personRepository.save(person.get());
+            eazyClass.getPersons().remove(person.get());
+            eazyClassRepository.save(eazyClass);
+        } else return new ModelAndView("redirect:/admin/displayStudents?classId="
+                + eazyClass.getClassId() + "&error=true");
+        httpSession.setAttribute("eazyClass",eazyClass);
+        return new ModelAndView("redirect:/admin/displayStudents?classId=" + eazyClass.getClassId());
+    }
 }
