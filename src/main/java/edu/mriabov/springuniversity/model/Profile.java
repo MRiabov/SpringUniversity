@@ -3,6 +3,9 @@ package edu.mriabov.springuniversity.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -42,6 +45,9 @@ public class Profile {
     @Size(min = 4, message = "State must be at least 4 characters long.")
     private String state;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "class_id", referencedColumnName = "classId")
+    private EazyClass eazyClass;
 
 
 }
