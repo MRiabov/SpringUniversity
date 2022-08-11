@@ -146,29 +146,24 @@ public class AdminController {
             return modelAndView;
         }
         personEntity.getCourses().add(courses);
-        personRepository.save(personEntity);
         courses.getPersons().add(personEntity);
+        personRepository.save(personEntity);
         httpSession.setAttribute("courses",courses);
         modelAndView.setViewName("redirect:/admin/viewStudents?id="+courses.getCourseId());
         return modelAndView;
     }
 
     @GetMapping("/deleteStudentFromCourse")
-    public ModelAndView deleteStudentFromCourse(Model model, @ModelAttribute("person") Person person,
-                                                HttpSession httpSession){
-        ModelAndView modelAndView = new ModelAndView();
-        Courses courses = (Courses) httpSession.getAttribute("courses");
-        Person personEntity = personRepository.readByEmail(person.getEmail());
-        if (personEntity==null||!(personEntity.getPersonId()>0)) {
-            modelAndView.setViewName("redirect:/admin/viewStudents?id=" + courses.getCourseId()
-                    + "&error=true");
-            return modelAndView;
-        }
-        personEntity.getCourses().remove(courses);
-        personRepository.save(personEntity);
-        courses.getPersons().remove(personEntity);
-        httpSession.setAttribute("courses",courses);
-        modelAndView.setViewName("redirect:/admin/viewStudents?id="+courses.getCourseId());
+    public ModelAndView deleteStudentFromCourse(Model model, @RequestParam int personId,
+                                                HttpSession session) {
+        Courses courses = (Courses) session.getAttribute("courses");
+        Optional<Person> person = personRepository.findById(personId);
+        person.get().getCourses().remove(courses);
+        courses.getPersons().remove(person);
+        personRepository.save(person.get());
+        session.setAttribute("courses",courses);
+        ModelAndView modelAndView = new
+                ModelAndView("redirect:/admin/viewStudents?id="+courses.getCourseId());
         return modelAndView;
-    }
+    } //todo I even made sure that our code matches. I don't know why it doesn't delete. I have no time as well.
 }
