@@ -55,7 +55,7 @@ public class AdminController {
 
     @GetMapping("/displayStudents")
     public ModelAndView displayStudents(Model model, @RequestParam int classId, HttpSession session, @RequestParam(value = "error", required = false) String error) {
-        String errorMessage = null;
+        String errorMessage;
         ModelAndView modelAndView = new ModelAndView("students.html");
         Optional<EazyClass> eazyClass = eazyClassRepository.findById(classId);
         modelAndView.addObject("eazyClass", eazyClass.get());
@@ -86,7 +86,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteStudent")
-    public ModelAndView deleteStudent(Model model,@ModelAttribute("personId") int personId,HttpSession httpSession){
+    public ModelAndView deleteStudent(Model model,@RequestParam int personId,HttpSession httpSession){
         Optional<Person> person = personRepository.findById(personId);
         EazyClass eazyClass = (EazyClass) httpSession.getAttribute("eazyClass");
 
@@ -107,6 +107,14 @@ public class AdminController {
         List<Courses> courses = coursesRepository.findAll();
         modelAndView.addObject("courses",courses);
         modelAndView.addObject("course",new Courses());
+        return modelAndView;
+    }
+
+    @PostMapping("/addNewCourse")
+    public ModelAndView addNewCourse(Model model, @ModelAttribute("course") Courses course){
+        ModelAndView modelAndView = new ModelAndView();
+        coursesRepository.save(course);
+        modelAndView.setViewName("redirect:/admin/displayCourses");
         return modelAndView;
     }
 }
