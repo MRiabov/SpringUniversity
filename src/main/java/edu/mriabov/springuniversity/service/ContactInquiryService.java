@@ -5,9 +5,12 @@ import edu.mriabov.springuniversity.model.Contact;
 import edu.mriabov.springuniversity.repository.ContactRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -24,10 +27,6 @@ public class ContactInquiryService {
         return isSaved;
     }
 
-    public List<Contact> findMsgsWithOpenStatus(){
-        return contactRepository.findByStatus(ContactInquiryConstants.OPEN);
-    }
-
     public boolean updateMsgStatus(int contactID) {
         boolean isUpdated=false;
         Optional<Contact> contact = contactRepository.findById(contactID);
@@ -35,5 +34,14 @@ public class ContactInquiryService {
         Contact updatedContact=contactRepository.save(contact.get());
         if (updatedContact.getUpdatedBy()!=null) isUpdated=true;
         return isUpdated;
+    }
+
+    public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir) {
+        int pageSize=5;
+        Pageable pageable = PageRequest.of(pageNum, pageSize,
+                (sortDir.equals("asc")) ?
+                (Sort.by(sortField).ascending()) : (Sort.by(sortField).descending()));
+
+        return contactRepository.findByStatus(ContactInquiryConstants.OPEN,pageable);
     }
 }
