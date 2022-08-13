@@ -10,11 +10,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface ContactRepository extends CrudRepository<Contact,Integer>{
 
-//    List<Contact> findByStatus(String status);
+    List<Contact> findByStatus(String status);
 
     @Query("SELECT c FROM Contact c WHERE c.status=:status")
     Page<Contact> findByStatus(String status, Pageable pageable);
