@@ -3,21 +3,20 @@ package edu.mriabov.springuniversity.service;
 import edu.mriabov.springuniversity.constants.ContactInquiryConstants;
 import edu.mriabov.springuniversity.model.Contact;
 import edu.mriabov.springuniversity.repository.ContactRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ContactInquiryService {
-    @Autowired
-    private ContactRepository contactRepository;
+
+    private final ContactRepository contactRepository;
 
     public boolean saveMessageDetails(Contact contact){
         boolean isSaved=false;
@@ -28,12 +27,9 @@ public class ContactInquiryService {
     }
 
     public boolean updateMsgStatus(int contactID) {
-        boolean isUpdated=false;
-        Optional<Contact> contact = contactRepository.findById(contactID);
-        contact.ifPresent(contact1-> contact1.setStatus(ContactInquiryConstants.CLOSED));
-        Contact updatedContact=contactRepository.save(contact.get());
-        if (updatedContact.getUpdatedBy()!=null) isUpdated=true;
-        return isUpdated;
+        int rows=contactRepository.updateStatusById(ContactInquiryConstants.CLOSED,contactID);
+        //if updated rows>0 operation is successful
+        return rows > 0;
     }
 
     public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir) {
