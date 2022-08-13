@@ -19,6 +19,7 @@ This project a fully operational school website.  It relies on Spring Framework 
     - Relationships(1-1, 1-M, M-M)
     - Sorting and paging.
 - **MySQL**
+- **REST**
 - Databases are hosted on **AWS** as an RDS.
 - Thymeleaf
 - Lombok 
