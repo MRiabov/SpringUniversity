@@ -24,8 +24,8 @@ public class ContactRestController {
 
     final ContactRepository contactRepository;
 
-    @GetMapping("/getMessageByStatus")
-    public List<Contact> getMessageByStatus(@RequestParam(name = "status") String status) {
+    @GetMapping("/getMessagesByStatus")
+    public List<Contact> getMessagesByStatus(@RequestParam(name = "status") String status) {
         return contactRepository.findByStatus(status);
     }
 
@@ -37,16 +37,16 @@ public class ContactRestController {
     }
 
     @PostMapping("/saveMsg")
-    public ResponseEntity<Response> saveMsg(@RequestHeader("invocationForm") String invocationForm,
+    public ResponseEntity<Response> saveMsg(@RequestHeader("invocationFrom") String invocationFrom,
                                             @Valid @RequestBody Contact contact) {
-        log.info(String.format("Header invocationForm = %s", invocationForm));
+        log.info(String.format("Header invocationFrom = %s", invocationFrom));
         contactRepository.save(contact);
         Response response = new Response();
         response.setStatusMsg("Message saved successfully");
         response.setStatusCode("200");
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .header("isMsgStatus", "true")
+                .header("isMsgSaved", "true")
                 .body(response);
     }
 //
@@ -62,7 +62,7 @@ public class ContactRestController {
                 .body(response);
     }
 
-    @PatchMapping
+    @PatchMapping("/closeMsg")
     public ResponseEntity<Response> close(@RequestBody Contact contactReq) {
         Optional<Contact> contact = contactRepository.findById(contactReq.getContactId());
         if (contact.isPresent()) {
