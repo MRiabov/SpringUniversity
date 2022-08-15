@@ -38,6 +38,6 @@ public class ContactInquiryService {
                 (sortDir.equals("asc")) ?
                 (Sort.by(sortField).ascending()) : (Sort.by(sortField).descending()));
 
-        return contactRepository.findByStatus(ContactInquiryConstants.OPEN,pageable);
+        return contactRepository.findByStatusWithQuery(ContactInquiryConstants.OPEN,pageable);
     }
 }

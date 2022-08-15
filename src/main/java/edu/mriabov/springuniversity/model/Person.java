@@ -5,6 +5,7 @@ import edu.mriabov.springuniversity.annotation.FieldsValueMatch;
 import edu.mriabov.springuniversity.annotation.PasswordValidator;
 import lombok.Getter;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -52,15 +53,18 @@ public class Person extends BaseEntity{
     @NotBlank(message="Confirm Email must not be blank")
     @Email(message = "Please provide a valid confirm email address" )
     @Transient
+    @JsonIgnore
     private String confirmEmail;
 
     @NotBlank(message = "Password must not be blank.")
     @PasswordValidator
     @Size(min = 6, message = "Password should be at least 6 characters long.")
+    @JsonIgnore
     private String pwd;
 
     @NotBlank(message = "Please confirm your password.")
     @Transient
+    @JsonIgnore
     private String confirmPwd;
 
     @OneToOne(fetch = FetchType.EAGER,cascade= CascadeType.PERSIST, targetEntity = Roles.class)
