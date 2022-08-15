@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Slf4j
-@Controller
+@Controller("ProfileControllerBean")
 @RequiredArgsConstructor
 public class ProfileController {
 
