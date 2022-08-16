@@ -166,5 +166,5 @@ public class AdminController {
         ModelAndView modelAndView = new
                 ModelAndView("redirect:/admin/viewStudents?id="+courses.getCourseId());
         return modelAndView;
-    } //todo I even made sure that our code matches. I don't know why it doesn't delete. I have no time as well.
+    }
 }

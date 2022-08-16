@@ -1,5 +1,6 @@
 package edu.mriabov.springuniversity.service;
 
+import edu.mriabov.springuniversity.config.SpringUniversityProperties;
 import edu.mriabov.springuniversity.constants.ContactInquiryConstants;
 import edu.mriabov.springuniversity.model.Contact;
 import edu.mriabov.springuniversity.repository.ContactRepository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class ContactInquiryService {
 
     private final ContactRepository contactRepository;
+    private final SpringUniversityProperties properties;
 
     public boolean saveMessageDetails(Contact contact){
         boolean isSaved=false;
@@ -33,7 +35,10 @@ public class ContactInquiryService {
     }
 
     public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir) {
-        int pageSize=5;
+        int pageSize= properties.getPageSize();
+        if (properties.getContact() != null && properties.getContact().get("pageSize")!=null) {
+            pageSize=Integer.parseInt(properties.getContact().get("pageSize").trim());
+        }
         Pageable pageable = PageRequest.of(pageNum, pageSize,
                 (sortDir.equals("asc")) ?
                 (Sort.by(sortField).ascending()) : (Sort.by(sortField).descending()));

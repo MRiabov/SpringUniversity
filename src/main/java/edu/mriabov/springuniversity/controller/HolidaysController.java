@@ -27,7 +27,7 @@ public class HolidaysController {
                 model.addAttribute("federal",true);
                 model.addAttribute("festival",true);
             }
-        }//todo is this ok?
+        }
         Iterable<Holiday> holidaysIterable = holidaysRepository.findAll();
         List<Holiday> holidays=java.util.stream.StreamSupport.stream(holidaysIterable.spliterator(),false)
                 .toList();
