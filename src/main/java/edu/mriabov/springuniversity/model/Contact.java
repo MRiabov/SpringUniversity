@@ -28,7 +28,7 @@ public class Contact extends BaseEntity{
     @Size(min=3, message = "Name should be at least 3 letters long.")
     private String name;
     @NotBlank(message = "Mobile number should not be blank.")
-    @Pattern(regexp = "(^$|\\d){10}")
+    @Pattern(regexp = "(^$|\\d){10}",message = "Number must contain 10 digits.")
     private String mobileNum;
     @NotBlank(message = "Email should not be blank.")
     @Email(message = "Please, enter a vaild email")

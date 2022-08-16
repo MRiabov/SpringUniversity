@@ -30,12 +30,7 @@ public class DashboardController {
             model.addAttribute("enrolledClass",person.getEazyClass());
         }
         session.setAttribute("loggedInUser", person);
-        logMessages();
         return "dashboard.html";
     }
-    private void logMessages() {
-        log.error("defaultPageSize value with Environment is : "+environment.getProperty("springuniversity.pageSize"));
-        log.error("successMsg value with Environment is : "+environment.getProperty("springuniversity.contact.successMsg"));
-        log.error("Java Home environment variable using Environment is : "+environment.getProperty("JAVA_HOME"));
-    }
+
 }
