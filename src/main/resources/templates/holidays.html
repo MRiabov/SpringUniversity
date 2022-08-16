@@ -46,8 +46,7 @@ Author URL: http://w3layouts.com
             <div class="row" >
                 <div class="col-lg-6" th:if="${festival}==true">
                     <h5 class="sub-title-timeline"><i class="fas fa-snowman"></i> Festival Holidays</h5>
-
-                        <div class="timeline">   <!--todo does this line mess this up?-->
+                        <div class="timeline">
                             <div th:each="holiday : ${FESTIVAL}" class="column">
                                 <div class="title">
                                     <h2 th:text="${holiday.reason}"></h2>

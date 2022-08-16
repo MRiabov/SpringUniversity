@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @ToString
 @RequiredArgsConstructor
 @Entity
-//todo noHashCode!
+
 @Table(name= "contact_msg")
 public class Contact extends BaseEntity{
 
