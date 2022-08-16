@@ -98,7 +98,7 @@ You can view the list of commands in edu/mriabov/springuniversity/rest/ContactRe
 
 You can also use HAL explorer to easily navigate the REST commands. Well, it's easier, at least.
 
-## Misc
+# Misc
 - There are profiles, which configure the properties. 2 available, one prod, one UAT(for testing purposes). They configure which log statements are to be displayed, how many contact messages are shown per one page, how many.
 - Breadcrumbs
 - HAL explorer: eases the search in REST
