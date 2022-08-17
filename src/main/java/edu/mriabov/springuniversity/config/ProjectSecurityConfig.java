@@ -13,10 +13,10 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().ignoringAntMatchers("/saveMsg", "/public/**","/api/**","/data-api/**").and()
+        http.csrf().ignoringAntMatchers("/saveMsg", "/public/**","/api/**", "/data-api/**").and()
                 .authorizeRequests()
                 .mvcMatchers("/dashboard","/displayProfile","/updateProfile","/api/**","/data-api/**").authenticated()
-                .mvcMatchers("/displayMessages","/admin/**").hasRole("ADMIN")
+                .mvcMatchers("/displayMessages","/admin/**","/springUniversity/actuator/**").hasRole("ADMIN")
                 .mvcMatchers("/student/**").hasRole("STUDENT")
                 .mvcMatchers("/home", "/holidays/**", "/contact", "/error",
                         "/saveMsg", "/courses", "/about", "/login", "/public/**","/profile/**").permitAll()
